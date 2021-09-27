@@ -1,13 +1,13 @@
 import 'package:app_lunch/app/MyApp.dart';
-import 'package:app_lunch/app/database/sqlite/connection.dart';
+import 'package:app_lunch/app/database/sqlite/dao/hamburguer_dao_impl.dart';
+import 'package:app_lunch/app/domain/entities/hamburguer.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 class MenuBurguer extends StatelessWidget {
   
-  Future<List<Map<String, dynamic>>> _buscar() async {
-    Database db = await Connection.get();
-    return db.query('cardapio');
+  Future<List<Hamburguer>> _buscar() async {
+    return HamburguerDAOImpl().find();
+
   }
 
   @override
@@ -16,8 +16,7 @@ class MenuBurguer extends StatelessWidget {
         future: _buscar(),
         builder: (context, futuro) {
           if (futuro.hasData) {
-            var cardapio = futuro.data;
-
+            List<Hamburguer> cardapio = futuro.data;
             return Scaffold(
               appBar: AppBar(
                 title: Text('Cardápio'),
@@ -35,12 +34,12 @@ class MenuBurguer extends StatelessWidget {
                 itemBuilder: (context, i) {
                   var hamburguer = cardapio[i];
                   var icon = CircleAvatar(
-                    backgroundImage: NetworkImage(hamburguer['url_icon']),
+                    backgroundImage: NetworkImage(hamburguer.url_icon),
                   );
                   return ListTile(
                     leading: icon,
-                    title: Text(hamburguer['nome']),
-                    subtitle: Text(hamburguer['valor']),
+                    title: Text(hamburguer.nome),
+                    subtitle: Text(hamburguer.descricao),
                     trailing: Container(
                         width: 100,
                         child: Row(
