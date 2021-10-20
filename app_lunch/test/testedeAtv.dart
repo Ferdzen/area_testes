@@ -9,7 +9,7 @@ Async e await: com async, sinalizamos que em algum momento será preciso aguarda
 prosseguir com a execução. Com await, pedimos para que se aguarde até que a função termine para continuar.
 */
 
-import 'dart:io';
+//import 'dart:io';
 
 void main() async{
 

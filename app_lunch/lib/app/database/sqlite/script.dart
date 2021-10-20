@@ -1,6 +1,6 @@
 final createTable = '''
 CREATE TABLE cardapio(
-  id INT PRIMARY KEY
+  id INTEGER NOT NULL PRIMARY KEY
   ,nome VARCHAR(200) 
   ,descricao VARCHAR(500) 
   ,valor NUM(10,2) 
